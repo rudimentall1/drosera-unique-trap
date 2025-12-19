@@ -1,26 +1,17 @@
-# Основная конфигурация
 [ethereum]
-rpc_url = "https://ethereum-sepolia-rpc.publicnode.com"
-chain_id = 11155111
+rpc_url = "https://ethereum-hoodi-rpc.publicnode.com"
+chain_id = 560048
 
-[drosera]
-rpc_url = "ВАШ_DROSERA_RPC" # Нужно получить у команды
-address = "ВАШ_DROSERA_АДРЕС" # Нужно получить у команды
-
-# Конфигурация трапа
 [[traps]]
-address = "0x2e6E9618786fF2AFCa7d74fb874FE289035210F5"
+address = "0x4FB582e1aEA38F8Ce109061A0DDf466AD0cf18Ec"
 collect_frequency_blocks = 1
 block_sample_size = 2
 cooldown_period_blocks = 0
 
-# Responder конфигурация
 [traps.response]
 contract = "0xc55ae4780895d945542143568b4B27c2aCE087EE"
-function = "execute" # ИЛИ "execute(uint256)" если принимает аргумент
-# calldata = "" # Оставить пустым или сгенерировать
+function = "execute"
 
-# Операторы
 [[traps.operators]]
 address = "0xc55ae4780895d945542143568b4B27c2aCE087EE"
 executor = "0xc55ae4780895d945542143568b4B27c2aCE087EE"
