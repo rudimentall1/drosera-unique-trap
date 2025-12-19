@@ -1,0 +1,13 @@
+{
+  "name": "ScheduledOneShotTrap",
+  "description": "One-time scheduled execution trap for Drosera Network",
+  "address": "0x2e6E9618786fF2AFCa7d74fb874FE289035210F5",
+  "network": "Sepolia",
+  "chainId": 11155111,
+  "transactionHash": "0xda03da63de649cefd2b9f79de2194b8103ada0121e7d8bf822678e41b05498b8",
+  "blockNumber": 1856088,
+  "triggerBlock": 1856179,
+  "status": "Triggered successfully",
+  "verified": true,
+  "etherscan": "https://sepolia.etherscan.io/address/0x2e6E9618786fF2AFCa7d74fb874FE289035210F5"
+}

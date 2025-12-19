@@ -1,0 +1,20 @@
+{
+  "trap": {
+    "address": "0x2e6E9618786fF2AFCa7d74fb874FE289035210F5",
+    "collect_frequency_blocks": 1,
+    "block_sample_size": 2,
+    "cooldown_period_blocks": 0
+  },
+  "responder": {
+    "address": "0xc55ae4780895d945542143568b4B27c2aCE087EE",
+    "calldata": "0x"
+  },
+  "operators": [
+    {
+      "address": "0xc55ae4780895d945542143568b4B27c2aCE087EE",
+      "executor": "0xc55ae4780895d945542143568b4B27c2aCE087EE"
+    }
+  ],
+  "rpc_url": "https://ethereum-hoodi-rpc.publicnode.com",
+  "chain_id": 11155111
+}
