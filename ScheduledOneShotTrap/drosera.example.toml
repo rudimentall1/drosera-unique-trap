@@ -1,0 +1,17 @@
+[ethereum]
+rpc_url = "https://ethereum-sepolia-rpc.publicnode.com"
+chain_id = 11155111
+
+[[traps]]
+address = "0x2e6E9618786fF2AFCa7d74fb874FE289035210F5"
+collect_frequency_blocks = 1
+block_sample_size = 2
+cooldown_period_blocks = 0
+
+[traps.response]
+contract = "YOUR_RESPONDER_ADDRESS"
+function = "execute"
+
+[[traps.operators]]
+address = "YOUR_ADDRESS"
+executor = "YOUR_EXECUTOR"
