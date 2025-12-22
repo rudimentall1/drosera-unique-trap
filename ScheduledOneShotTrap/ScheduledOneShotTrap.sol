@@ -31,7 +31,7 @@ contract ScheduledOneShotTrap is ITrap {
         bool triggerCondition = previousSample <= SCHEDULED_BLOCK && newestSample > SCHEDULED_BLOCK;
         
         if (triggerCondition) {
-            return (true, abi.encode(newestSample));
+            return (true, bytes(""));
         } else {
             return (false, bytes(""));
         }
