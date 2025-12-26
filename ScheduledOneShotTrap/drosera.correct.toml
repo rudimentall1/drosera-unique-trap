@@ -5,9 +5,12 @@ eth_chain_id = 560048
 drosera_address = "NEED_FROM_DROSERA_TEAM"
 
 [traps.scheduled_one_shot]
-path = "src/ScheduledOneShotTrap.sol"
+path = "out/ScheduledOneShotTrap.sol/ScheduledOneShotTrap.json"
 response_contract = "0xc55ae4780895d945542143568b4B27c2aCE087EE"
 response_function = "execute()"
-collect_frequency_blocks = 1
 block_sample_size = 2
 cooldown_period_blocks = 0
+min_number_of_operators = 1
+max_number_of_operators = 1
+private_trap = false
+whitelist = []
