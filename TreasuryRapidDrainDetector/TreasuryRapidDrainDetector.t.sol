@@ -30,12 +30,10 @@ contract TreasuryRapidDrainDetectorTest is Test {
     }
     
     function testNoDrain() public {
-        // Устанавливаем баланс через vm.deal (способ forge)
         vm.deal(address(treasury), 1000 ether);
         
         uint256 previousBalance = address(treasury).balance;
         
-        // Снимаем 10% через vm.prank
         vm.prank(address(treasury));
         payable(address(0)).transfer(100 ether);
         
@@ -50,12 +48,10 @@ contract TreasuryRapidDrainDetectorTest is Test {
     }
     
     function testRapidDrain() public {
-        // Устанавливаем баланс через vm.deal
         vm.deal(address(treasury), 1000 ether);
         
         uint256 previousBalance = address(treasury).balance;
         
-        // Снимаем 30% через vm.prank
         vm.prank(address(treasury));
         payable(address(0)).transfer(300 ether);
         
@@ -75,5 +71,27 @@ contract TreasuryRapidDrainDetectorTest is Test {
         
         (bool should, ) = detector.shouldRespond(data);
         assert(!should);
+    }
+    
+    function testRapidDrainWithPayload() public {
+        vm.deal(address(treasury), 1000 ether);
+        
+        uint256 previousBalance = address(treasury).balance;
+        
+        vm.prank(address(treasury));
+        payable(address(0)).transfer(300 ether);
+        
+        uint256 currentBalance = address(treasury).balance;
+        
+        bytes[] memory data = new bytes[](2);
+        data[0] = abi.encode(currentBalance);
+        data[1] = abi.encode(previousBalance);
+        
+        (bool should, bytes memory payload) = detector.shouldRespond(data);
+        assert(should);
+        
+        (uint256 decodedPrev, uint256 decodedCurr) = abi.decode(payload, (uint256, uint256));
+        assert(decodedPrev == previousBalance);
+        assert(decodedCurr == currentBalance);
     }
 }

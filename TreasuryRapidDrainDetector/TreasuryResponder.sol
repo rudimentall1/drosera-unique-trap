@@ -7,6 +7,7 @@ interface IProtocol {
 
 contract TreasuryResponder {
     address public immutable protocol;
+    address public immutable droseraExecutor;
     
     event DrainDetected(
         address indexed treasury,
@@ -17,11 +18,16 @@ contract TreasuryResponder {
         uint256 blockNumber
     );
     
-    constructor(address _protocol) {
+    constructor(address _protocol, address _droseraExecutor) {
         protocol = _protocol;
+        droseraExecutor = _droseraExecutor;
     }
     
-    function pause(uint256 previousBalance, uint256 currentBalance) external {
+    function pause(bytes calldata data) external {
+        require(msg.sender == droseraExecutor, "unauthorized");
+        
+        (uint256 previousBalance, uint256 currentBalance) = abi.decode(data, (uint256, uint256));
+        
         uint256 drained = previousBalance - currentBalance;
         uint256 percent = (drained * 100) / previousBalance;
         
