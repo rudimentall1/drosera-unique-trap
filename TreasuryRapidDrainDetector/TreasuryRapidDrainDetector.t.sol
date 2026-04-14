@@ -7,10 +7,6 @@ import "../src/TreasuryRapidDrainDetector.sol";
 contract MockTreasury {
     uint256 public balance;
     
-    function setBalance(uint256 _balance) external {
-        balance = _balance;
-    }
-    
     receive() external payable {
         balance = address(this).balance;
     }
@@ -82,6 +78,8 @@ contract TreasuryRapidDrainDetectorTest is Test {
         payable(address(0)).transfer(300 ether);
         
         uint256 currentBalance = address(treasury).balance;
+        uint256 drained = previousBalance - currentBalance;
+        uint256 percent = (drained * 100) / previousBalance;
         
         bytes[] memory data = new bytes[](2);
         data[0] = abi.encode(currentBalance);
@@ -90,8 +88,12 @@ contract TreasuryRapidDrainDetectorTest is Test {
         (bool should, bytes memory payload) = detector.shouldRespond(data);
         assert(should);
         
-        (uint256 decodedPrev, uint256 decodedCurr) = abi.decode(payload, (uint256, uint256));
+        (uint256 decodedPrev, uint256 decodedCurr, uint256 decodedDrained, uint256 decodedPercent) = 
+            abi.decode(payload, (uint256, uint256, uint256, uint256));
+        
         assert(decodedPrev == previousBalance);
         assert(decodedCurr == currentBalance);
+        assert(decodedDrained == drained);
+        assert(decodedPercent == percent);
     }
 }

@@ -54,7 +54,9 @@ contract TreasuryRapidDrainDetector is ITrap {
                             (previousBalance - currentBalance) >= thresholdAmount;
         
         if (isRapidDrain) {
-            return (true, abi.encode(previousBalance, currentBalance));
+            uint256 drained = previousBalance - currentBalance;
+            uint256 percent = (drained * 100) / previousBalance;
+            return (true, abi.encode(previousBalance, currentBalance, drained, percent));
         }
         
         return (false, bytes(""));
