@@ -1,25 +1,26 @@
 # Drosera Unique Traps
 
-## ScheduledOneShotTrap
+## TreasuryRapidDrainDetector
 
-One-time scheduled execution trap for Drosera Network.
+Ловит резкий вывод средств из казначейства или пула ликвидности.
 
-- **Network:** Hoodi (chainId: 560048)
-- **Address:** `0x4FB582e1aEA38F8Ce109061A0DDf466AD0cf18Ec`
-- **Code:** [ScheduledOneShotTrap.sol](ScheduledOneShotTrap/ScheduledOneShotTrap.sol)
-- **Config:** [drosera.correct.toml](ScheduledOneShotTrap/drosera.correct.toml)
+Адрес (Hoodi): `0x133d815B79D8ED4f824c77aF0E739bF75f19B56D`
 
-### Features
-- Rising edge logic (triggers once at scheduled block)
-- Empty data protection
-- All Drosera feedback applied
-- 7/7 tests passing
+Как работает:
+- Собирает баланс
+- Сравнивает с предыдущим значением
+- Если баланс упал больше чем на 20% за блок — срабатывает
 
-### Use Cases
-- Token vesting schedules
-- DAO proposal deadlines
-- NFT rental expiration
-- Time-based contract upgrades
+Тесты: 3/3 прошли
+
+Код: [TreasuryRapidDrainDetector/](TreasuryRapidDrainDetector/)
 
 ---
-More traps coming soon.
+
+## ScheduledOneShotTrap
+
+Демо-трап для отложенного одноразового срабатывания по блоку.
+
+Адрес (Hoodi): `0x4FB582e1aEA38F8Ce109061A0DDf466AD0cf18Ec`
+
+Код: [ScheduledOneShotTrap/](ScheduledOneShotTrap/)
