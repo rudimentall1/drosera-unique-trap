@@ -21,16 +21,12 @@ contract TreasuryResponder {
         protocol = _protocol;
     }
     
-    function pause(
-        address treasury,
-        uint256 previousBalance,
-        uint256 currentBalance
-    ) external {
+    function pause(uint256 previousBalance, uint256 currentBalance) external {
         uint256 drained = previousBalance - currentBalance;
         uint256 percent = (drained * 100) / previousBalance;
         
         emit DrainDetected(
-            treasury,
+            protocol,
             previousBalance,
             currentBalance,
             drained,
@@ -38,7 +34,6 @@ contract TreasuryResponder {
             block.number
         );
         
-        // Вызываем паузу на защищаемом протоколе
         IProtocol(protocol).pause();
     }
 }
