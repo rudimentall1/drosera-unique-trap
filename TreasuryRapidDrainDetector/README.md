@@ -4,29 +4,27 @@ Designed for treasury drain detection in DeFi protocols.
 
 ## Architecture
 
-+-----------------+ +-----------------+ +-----------------+
-| Every block |---->| Trap checks |---->| Responder |
-| collect() | | balance drop | | pause() |
-+-----------------+ +-----------------+ +-----------------+
-|
-v
-+-----------------+
-| Payload: |
-| - previous |
-| - current |
-| - drained |
-| - percent |
-+-----------------+
+```text
++-----------------+     +-----------------+     +-----------------+
+| Every block     | --> | Trap checks     | --> | Responder       |
+| collect()       |     | balance drop    |     | pause()         |
++-----------------+     +-----------------+     +-----------------+
+                               |
+                               v
+                      +-----------------+
+                      | Payload         |
+                      | - previous      |
+                      | - current       |
+                      | - drained       |
+                      | - percent       |
+                      +-----------------+
+How It Works
+collect() — reads current balance of protected contract (ETH or ERC20)
 
-## How It Works
+shouldRespond() — compares with previous balance, triggers if drop > 20%
 
-1. **collect()** — reads current balance of protected contract (ETH or ERC20)
-2. **shouldRespond()** — compares with previous balance, triggers if drop > 20%
-3. **pause(bytes)** — decodes payload, emits event, pauses protocol
-
-## Configuration
-
-```toml
+pause(bytes) — decodes payload, emits event, pauses protocol
+Configuration
 ethereum_rpc = "https://ethereum-hoodi-rpc.publicnode.com"
 eth_chain_id = 560048
 
